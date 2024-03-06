@@ -2,7 +2,8 @@
     "name": "Rope",
     "rootNamespace": "Rope",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c"
+        "GUID:75469ad4d38634e559750d17036d5f7c",
+        "GUID:fae1fdd414ca8434fbcfd631bc162ca0"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],
