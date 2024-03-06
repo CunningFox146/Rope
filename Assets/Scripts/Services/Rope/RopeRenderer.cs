@@ -15,10 +15,11 @@ namespace Rope.Services.Rope
         [SerializeField] private Transform _endPoint;
 
         private readonly List<Vector3> _points = new();
-        private readonly List<Vector3> _renderPoints = new();
         private Transform _activeEndPoint;
         private Vector2 _activeStartPoint;
         private Vector3 _lastPos;
+        
+        public List<Vector3> RenderPoints { get; private set; } = new();
 
         private void Update()
         {
@@ -90,14 +91,14 @@ namespace Rope.Services.Rope
 
         private void RenderLine()
         {
-            _renderPoints.Clear();
-            _renderPoints.Add(_startPoint.position);
-            _renderPoints.AddRange(_points);
-            _renderPoints.Add(_activeStartPoint);
-            _renderPoints.Add(_activeEndPoint.position);
+            RenderPoints.Clear();
+            RenderPoints.Add(_startPoint.position);
+            RenderPoints.AddRange(_points);
+            RenderPoints.Add(_activeStartPoint);
+            RenderPoints.Add(_activeEndPoint.position);
 
-            _lineRenderer.positionCount = _renderPoints.Count;
-            for (var i = 0; i < _renderPoints.Count; i++) _lineRenderer.SetPosition(i, _renderPoints[i]);
+            _lineRenderer.positionCount = RenderPoints.Count;
+            for (var i = 0; i < RenderPoints.Count; i++) _lineRenderer.SetPosition(i, RenderPoints[i]);
         }
 
         private void BuildRopePath()

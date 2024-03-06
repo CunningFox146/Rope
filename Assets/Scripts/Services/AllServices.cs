@@ -1,8 +1,8 @@
 using System;
-using UnityEngine;
+using Rope.Infrastructure;
 using Object = UnityEngine.Object;
 
-namespace Rope.Infrastructure
+namespace Rope.Services
 {
     public class AllServices
     {
@@ -11,7 +11,6 @@ namespace Rope.Infrastructure
 
         public void RegisterSingle<TService>(TService implementation) where TService : IService
         {
-            Debug.Log($"RegisterSingle {typeof(TService).Name}");
             Implementation<TService>.ServiceInstance = implementation;
         }
 
