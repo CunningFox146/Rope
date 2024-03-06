@@ -1,12 +1,13 @@
 using System.Collections.Generic;
 using System.Linq;
+using Rope.Infrastructure;
 using Rope.Util;
 using UnityEditor;
 using UnityEngine;
 
-namespace Rope
+namespace Rope.Services.Render
 {
-    public class TestRopeManager : MonoBehaviour
+    public class RopeRender : MonoBehaviour, IService
     {
         [SerializeField] private LineRenderer _lineRenderer;
         [SerializeField] private Transform _startPoint;
