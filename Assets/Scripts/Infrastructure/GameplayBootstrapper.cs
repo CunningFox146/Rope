@@ -1,5 +1,8 @@
 ﻿using System;
-using Rope.Services.Render;
+using Rope.Infrastructure.CoroutineRunner;
+using Rope.Services.Inputs;
+using Rope.Services.Interactions;
+using Rope.Services.Rope;
 using Rope.Services.States;
 using UnityEngine;
 
@@ -25,6 +28,7 @@ namespace Rope.Infrastructure
         private void RegisterSceneServices(AllServices container)
         {
             container.RegisterSingleFromHierarchy<RopeRenderer>();
+            container.RegisterSingle(new InteractionService(container.Single<ICoroutineRunner>(), container.Single<IInputService>(), Camera.main));
         }
 
         private void RegisterSceneStates(AllServices container)

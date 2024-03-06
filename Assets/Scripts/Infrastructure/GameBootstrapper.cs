@@ -21,6 +21,7 @@ namespace Rope.Infrastructure
 
         private void RegisterServices(AllServices container)
         {
+            container.RegisterSingle<ICoroutineRunner>(this);
             container.RegisterSingle<ISceneLoader>(new SceneLoader(this));
             container.RegisterSingle<IInputService>(new InputService(new MasterInput()));
             

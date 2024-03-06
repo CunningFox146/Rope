@@ -10,5 +10,7 @@ namespace Rope.Services.Inputs
         event Action ClickCancelled;
         event Action<Vector2> Hold;
         event Action HoldCancelled;
+        
+        public Vector2 PointerPosition { get; }
     }
 }

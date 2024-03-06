@@ -13,7 +13,7 @@ namespace Rope.Services.Inputs
         
         private readonly MasterInput _input;
 
-        private Vector2 ClickPosition => _input.Generic.ClickPosition.ReadValue<Vector2>();
+        public Vector2 PointerPosition => _input.Generic.ClickPosition.ReadValue<Vector2>();
 
         public InputService(MasterInput input)
         {
@@ -41,12 +41,12 @@ namespace Rope.Services.Inputs
         
         private void OnClickPerformed(InputAction.CallbackContext context)
         {
-            Click?.Invoke(ClickPosition);
+            Click?.Invoke(PointerPosition);
         }
 
         private void OnHoldPerformed(InputAction.CallbackContext obj)
         {
-            Hold?.Invoke(ClickPosition);
+            Hold?.Invoke(PointerPosition);
         }
 
         private void OnClickCancelled(InputAction.CallbackContext obj)
