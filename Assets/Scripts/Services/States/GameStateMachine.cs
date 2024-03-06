@@ -6,7 +6,7 @@ using Rope.Services.SceneLoading;
 
 namespace Rope.Services.States
 {
-    public class GameStateMachine
+    public class GameStateMachine : IService
     {
         private readonly Dictionary<Type, IState> _states;
         private IState _activeState;
@@ -15,13 +15,18 @@ namespace Rope.Services.States
         {
             _states = new Dictionary<Type, IState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(services.Single<ISceneLoader>()),
+                [typeof(BootstrapState)] = new BootstrapState(this, services.Single<ISceneLoader>()),
             };
+        }
+
+        public void RegisterState<TState>(TState state) where TState : class, IState
+        {
+            _states.Add(typeof(TState), state);
         }
     
         public void Enter<TState>() where TState : class, IState
         {
-            IState state = ChangeState<TState>();
+            var state = ChangeState<TState>();
             state.Enter();
         }
 

@@ -23,7 +23,9 @@ namespace Rope.Infrastructure
         {
             container.RegisterSingle<ISceneLoader>(new SceneLoader(this));
             container.RegisterSingle<IInputService>(new InputService(new MasterInput()));
+            
             StateMachine = new GameStateMachine(container);
+            container.RegisterSingle(StateMachine);
         }
     }
 }

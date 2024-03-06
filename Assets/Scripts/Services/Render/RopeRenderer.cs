@@ -7,23 +7,18 @@ using UnityEngine;
 
 namespace Rope.Services.Render
 {
-    public class RopeRender : MonoBehaviour, IService
+    public class RopeRenderer : MonoBehaviour, IService
     {
+        [SerializeField] private float _additionalRadius = 0.05f;
         [SerializeField] private LineRenderer _lineRenderer;
-        [SerializeField] private Transform _startPoint;
-        [SerializeField] private Transform _endPoint;
 
         private readonly List<Vector3> _points = new();
         private readonly List<Vector3> _renderPoints = new();
+        private Transform _startPoint;
+        private Transform _endPoint;
         private Transform _activeEndPoint;
         private Vector2 _activeStartPoint;
         private Vector3 _lastPos;
-
-        private void Start()
-        {
-            _activeStartPoint = _startPoint.position;
-            _activeEndPoint = _endPoint;
-        }
 
         private void Update()
         {
@@ -59,6 +54,15 @@ namespace Rope.Services.Render
         }
 #endif
 
+        public void Init(Transform startPoint, Transform endPoint)
+        {
+            _startPoint = startPoint;
+            _endPoint = endPoint;
+            
+            _activeStartPoint = _startPoint.position;
+            _activeEndPoint = _endPoint;
+        }
+
         private void ValidatePoints()
         {
             if (_points.Count <= 1)
@@ -72,7 +76,7 @@ namespace Rope.Services.Render
             var points = _points.AsReadOnly().Reverse();
             foreach (var point in points)
             {
-                if (Physics2D.Linecast(_activeEndPoint.position, point))
+                if (Physics2D.Linecast(_activeEndPoint.position, point, 1 << (int)Layers.Obstacle))
                     break;
                 _points.Remove(point);
             }
@@ -80,7 +84,7 @@ namespace Rope.Services.Render
 
         private void ValidateLastPoint()
         {
-            if (Physics2D.Linecast(_startPoint.position, _activeEndPoint.position))
+            if (Physics2D.Linecast(_startPoint.position, _activeEndPoint.position, 1 << (int)Layers.Obstacle))
                 return;
 
             _points.Clear();
@@ -105,11 +109,11 @@ namespace Rope.Services.Render
             var endPoint = _activeEndPoint.position;
             while (true)
             {
-                var hit = Physics2D.Linecast(startPoint, endPoint);
+                var hit = Physics2D.Linecast(startPoint, endPoint, 1 << (int)Layers.Obstacle);
                 if (!hit || hit.collider is not CircleCollider2D circle)
                     break;
 
-                var radius = circle.radius + 0.01f;
+                var radius = circle.radius + _additionalRadius;
                 var circlePos = (Vector2)circle.transform.position;
                 var direction = (hit.point - circlePos).normalized;
                 var newPoint = circlePos + direction * radius;

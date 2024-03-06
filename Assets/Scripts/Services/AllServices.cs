@@ -1,3 +1,6 @@
+using System;
+using Object = UnityEngine.Object;
+
 namespace Rope.Infrastructure
 {
     public class AllServices
@@ -13,6 +16,14 @@ namespace Rope.Infrastructure
         public TService Single<TService>() where TService : IService
         {
             return Implementation<TService>.ServiceInstance;
+        }
+        
+        public void RegisterSingleFromHierarchy<TService>() where TService : Object, IService
+        {
+            var implementation = Object.FindAnyObjectByType<TService>();
+            if (implementation is null)
+                throw new Exception($"Failed to find {typeof(TService).Name} in scene hierarchy");
+            Implementation<TService>.ServiceInstance = implementation;
         }
 
         private class Implementation<TService> where TService : IService
