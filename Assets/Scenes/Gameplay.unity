@@ -216,7 +216,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0f9404672c4b40388d6f77143af9e5a6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _characterPrefab: {fileID: 2625826912748954540, guid: ca417655dd7f16546b58343fe6ac2ac4, type: 3}
+  _characterPrefab: {fileID: 8237839939218719009, guid: ca417655dd7f16546b58343fe6ac2ac4, type: 3}
+  _ropeRenderer: {fileID: 1912964417}
   _characterCount: 20
   _size: 1
 --- !u!4 &356326983
@@ -352,6 +353,52 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0.19, y: 0.05, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &475575673
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 475575675}
+  - component: {fileID: 475575674}
+  m_Layer: 0
+  m_Name: EndPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &475575674
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475575673}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 669fc73026d5498a845c7bdd816c5c82, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _ropeEnd: {fileID: 2144299489}
+  _distance: 1
+--- !u!4 &475575675
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 475575673}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: -4, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -821,6 +868,7 @@ GameObject:
   - component: {fileID: 2144299489}
   - component: {fileID: 2144299490}
   - component: {fileID: 2144299491}
+  - component: {fileID: 2144299492}
   m_Layer: 0
   m_Name: End
   m_TagString: Untagged
@@ -885,6 +933,21 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _rigidbody: {fileID: 2144299490}
+--- !u!114 &2144299492
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2144299488}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742bda0eac6c4d00995f07eccb8b02dd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _spriteRenderer: {fileID: 612352372}
+  _endPoint: {fileID: 475575674}
+  _nearColor: {r: 0.12335339, g: 0.87169814, b: 0.18802539, a: 1}
 --- !u!1001 &1795363064156548238
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -952,3 +1015,4 @@ SceneRoots:
   - {fileID: 519420032}
   - {fileID: 1795363064156548238}
   - {fileID: 454194321}
+  - {fileID: 475575675}

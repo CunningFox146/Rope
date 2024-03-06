@@ -14,6 +14,7 @@ namespace Rope.Services.Interactions
         private IDraggable _currentDraggable;
 
         private Coroutine _draggableCoroutine;
+        public bool IsInteracting => _currentDraggable is not null;
 
         public InteractionService(ICoroutineRunner coroutineRunner, IInputService inputService, Camera camera)
         {
