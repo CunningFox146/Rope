@@ -15,7 +15,7 @@ namespace Rope.Services.States
         {
             _states = new Dictionary<Type, IState>
             {
-                [typeof(BootstrapState)] = new BootstrapState(this, services.Single<ISceneLoader>()),
+                [typeof(BootstrapState)] = new BootstrapState(services.Single<ISceneLoader>())
             };
         }
 
@@ -23,7 +23,7 @@ namespace Rope.Services.States
         {
             _states.Add(typeof(TState), state);
         }
-    
+
         public void Enter<TState>() where TState : class, IState
         {
             var state = ChangeState<TState>();
@@ -35,14 +35,16 @@ namespace Rope.Services.States
         {
             if (_activeState is IExitableState exitableState)
                 exitableState.Exit();
-      
+
             var state = GetState<TState>();
             _activeState = state;
-      
+
             return state;
         }
 
-        private TState GetState<TState>() where TState : class, IState => 
-            _states[typeof(TState)] as TState;
+        private TState GetState<TState>() where TState : class, IState
+        {
+            return _states[typeof(TState)] as TState;
+        }
     }
 }

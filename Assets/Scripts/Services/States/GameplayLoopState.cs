@@ -11,16 +11,18 @@ namespace Rope.Services.States
 {
     public class GameplayLoopState : IState, IExitableState
     {
-        private readonly GameStateMachine _stateMachine;
-        private readonly IInputService _inputService;
+        private readonly CharacterSpawner _characterSpawner;
         private readonly ICoroutineRunner _coroutineRunner;
         private readonly EndPointService _endPointService;
-        private readonly CharacterSpawner _characterSpawner;
+        private readonly IInputService _inputService;
         private readonly InteractionService _interactionService;
         private readonly WaitForSeconds _releaseDelay = new(0.25f);
+        private readonly GameStateMachine _stateMachine;
         private Coroutine _holdCoroutine;
 
-        public GameplayLoopState(GameStateMachine stateMachine, IInputService inputService, ICoroutineRunner coroutineRunner, EndPointService endPointService, CharacterSpawner characterSpawner, InteractionService interactionService)
+        public GameplayLoopState(GameStateMachine stateMachine, IInputService inputService,
+            ICoroutineRunner coroutineRunner, EndPointService endPointService, CharacterSpawner characterSpawner,
+            InteractionService interactionService)
         {
             _stateMachine = stateMachine;
             _inputService = inputService;
@@ -35,15 +37,15 @@ namespace Rope.Services.States
             _inputService.Hold += OnHold;
             _inputService.HoldCancelled += OnHoldCancelled;
         }
-
+        
         public void Exit()
         {
             StopMovementCoroutine();
-            
+
             _inputService.Hold -= OnHold;
             _inputService.HoldCancelled -= OnHoldCancelled;
         }
-
+        
         private void OnHold(Vector2 pos)
         {
             if (_holdCoroutine is null && _endPointService.IsRopeNear)
@@ -68,7 +70,7 @@ namespace Rope.Services.States
         {
             if (_holdCoroutine is null)
                 return;
-            
+
             _coroutineRunner.StopCoroutine(_holdCoroutine);
             _holdCoroutine = null;
         }
