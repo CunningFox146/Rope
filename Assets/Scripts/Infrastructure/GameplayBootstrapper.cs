@@ -6,6 +6,7 @@ using Rope.Services.Interactions;
 using Rope.Services.Rope;
 using Rope.Services.Spawner;
 using Rope.Services.States;
+using Rope.UI;
 using UnityEngine;
 
 namespace Rope.Infrastructure
@@ -13,6 +14,7 @@ namespace Rope.Infrastructure
     public class GameplayBootstrapper : MonoBehaviour
     {
         [SerializeField] private GameObject _characterSpawnerPrefab;
+        [SerializeField] private GameObject _uiPrefab;
         private GameStateMachine _stateMachine;
 
         private void Awake()
@@ -35,6 +37,7 @@ namespace Rope.Infrastructure
             container.RegisterSingle(new InteractionService(container.Single<ICoroutineRunner>(),
                 container.Single<IInputService>(), Camera.main));
             container.RegisterSingleFromNewPrefab<CharacterSpawner>(_characterSpawnerPrefab);
+            container.RegisterSingleFromNewPrefab<UserInterfaceSystem>(_uiPrefab);
         }
 
         private void RegisterSceneStates(AllServices container)
