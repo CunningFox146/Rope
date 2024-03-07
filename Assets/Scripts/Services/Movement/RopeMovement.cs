@@ -23,6 +23,7 @@ namespace Rope.Services.Movement
         {
             StopMoving();
             _movementCoroutine = StartCoroutine(MovementCoroutine(points.ToList(), onMovementDone));
+            Move?.Invoke();
         }
 
         private void StopMoving()

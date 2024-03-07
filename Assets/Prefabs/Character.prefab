@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 3269423913901092105}
   - component: {fileID: 8237839939218719009}
   - component: {fileID: 4134340229586706627}
+  - component: {fileID: 3166141804162781559}
   m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
@@ -63,6 +64,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _movement: {fileID: 8237839939218719009}
+  _renderer: {fileID: 6601842814721644194}
+--- !u!114 &3166141804162781559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625826912748954540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b4544ebe96054f7ea4ba1c97bc23bd4b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _movement: {fileID: 8237839939218719009}
+  _death: {fileID: 4134340229586706627}
+  _light: {fileID: 2015892967470179004}
 --- !u!1 &2747089830584446978
 GameObject:
   m_ObjectHideFlags: 0
@@ -117,7 +134,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+  - {fileID: 2100000, guid: 2df99eb724b4311498496c86bec24a72, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -222,7 +239,7 @@ MonoBehaviour:
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 0.35
+  m_PointLightOuterRadius: 1
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
