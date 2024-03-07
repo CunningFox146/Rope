@@ -9,7 +9,7 @@ namespace Rope.UI
 
         private RectTransform Transform => (RectTransform)transform;
         
-        public void Show()
+        public virtual void Show()
         {
             var startPos = Transform.anchoredPosition;
             _canvasGroup.alpha = 0f;
@@ -17,11 +17,11 @@ namespace Rope.UI
 
             gameObject.SetActive(true);
             DOTween.Sequence()
-                .Join(Transform.DOAnchorPos(startPos, 1f).SetEase(Ease.OutSine))
-                .Join(_canvasGroup.DOFade(1f, 1f));
+                .Join(Transform.DOAnchorPos(startPos, 1.5f).SetEase(Ease.OutSine))
+                .Join(_canvasGroup.DOFade(1f, 1.5f).SetEase(Ease.OutSine));
         }
 
-        public void Hide()
+        public virtual void Hide()
         {
             gameObject.SetActive(false);
         }
