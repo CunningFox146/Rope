@@ -9,6 +9,7 @@ namespace Rope.Services.Movement
     public class RopeMovement : MonoBehaviour
     {
         public event Action Move;
+        public event Action ReachDestination;
         
         [SerializeField] private float _minDistance;
         [SerializeField] private float _speed = 1f;
@@ -19,10 +20,10 @@ namespace Rope.Services.Movement
             StopMoving();
         }
 
-        public void StartMoving(List<Vector3> points, Action onMovementDone)
+        public void StartMoving(List<Vector3> points)
         {
             StopMoving();
-            _movementCoroutine = StartCoroutine(MovementCoroutine(points.ToList(), onMovementDone));
+            _movementCoroutine = StartCoroutine(MovementCoroutine(points.ToList()));
             Move?.Invoke();
         }
 
@@ -32,7 +33,7 @@ namespace Rope.Services.Movement
                 StopCoroutine(_movementCoroutine);
         }
 
-        private IEnumerator MovementCoroutine(List<Vector3> points, Action onMovementDone)
+        private IEnumerator MovementCoroutine(List<Vector3> points)
         {
             foreach (var point in points)
             {
@@ -42,7 +43,7 @@ namespace Rope.Services.Movement
                     yield return null;
                 }
             }
-            onMovementDone?.Invoke();
+            ReachDestination?.Invoke();
         }
     }
 }

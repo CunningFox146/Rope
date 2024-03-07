@@ -2,6 +2,7 @@
 using Rope.Infrastructure;
 using Rope.Infrastructure.CoroutineRunner;
 using Rope.Services.Inputs;
+using Rope.Util;
 using UnityEngine;
 
 namespace Rope.Services.Interactions
@@ -61,7 +62,7 @@ namespace Rope.Services.Interactions
         private TComponent GetComponentAtPoint<TComponent>(Vector2 pos)
         {
             var point = new Vector3(pos.x, pos.y, _camera.nearClipPlane);
-            var collider = Physics2D.OverlapPoint(_camera.ScreenToWorldPoint(point));
+            var collider = Physics2D.OverlapPoint(_camera.ScreenToWorldPoint(point), 1 << (int)Layers.Rope);
             return collider ? collider.GetComponentInParent<TComponent>() : default;
         }
     }

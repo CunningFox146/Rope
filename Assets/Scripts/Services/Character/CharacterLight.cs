@@ -21,12 +21,14 @@ namespace Rope.Services.Character
             _light.intensity = 0f;
             
             _movement.Move += OnMove;
+            _movement.ReachDestination += OnReachDestination;
             _death.Death += OnDeath;
         }
 
         private void OnDisable()
         {
             _movement.Move -= OnMove;
+            _movement.ReachDestination -= OnReachDestination;
             _death.Death -= OnDeath;
         }
 
@@ -37,6 +39,12 @@ namespace Rope.Services.Character
         }
         
         private void OnDeath()
+        {
+            _intensityTween?.Kill();
+            _intensityTween = _light.DOIntensity(0f, 0.5f);
+        }
+        
+        private void OnReachDestination()
         {
             _intensityTween?.Kill();
             _intensityTween = _light.DOIntensity(0f, 0.5f);

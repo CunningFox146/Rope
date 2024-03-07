@@ -43,12 +43,16 @@ namespace Rope.Services.Spawner
                 return;
 
             var characterDeath = character.GetComponent<CharacterDeath>();
-            character.StartMoving(_ropeRenderer.RenderPoints, OnMovementDone);
-            characterDeath.Death += OnDeath;
+            
+            character.StartMoving(_ropeRenderer.RenderPoints);
             _activeCharacters.Add(character);
 
-            void OnMovementDone()
+            character.ReachDestination += OnReachDestination;
+            characterDeath.Death += OnDeath;
+
+            void OnReachDestination()
             {
+                character.ReachDestination -= OnReachDestination;
                 _activeCharacters.Remove(character);
                 UpdateActiveCharacters();
             }

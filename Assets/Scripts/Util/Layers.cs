@@ -8,5 +8,7 @@
         Water = 4,
         UI = 5,
         Obstacle = 6,
+        Character = 7,
+        Rope = 8,
     }
 }
