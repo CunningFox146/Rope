@@ -10,6 +10,7 @@ namespace Rope.UI
 {
     public class UserInterfaceSystem : MonoBehaviour, IService
     {
+        [SerializeField] private GameObject _guide;
         [SerializeField] private Popup _endGamePopup;
         private IInputService _input;
         private CharacterSpawner _spawner;
@@ -34,7 +35,7 @@ namespace Rope.UI
         private void OnClick(Vector2 obj)
         {
             _input.Click -= OnClick;
-            // Hide guide
+            _guide.gameObject.SetActive(false);
         }
     }
 }
