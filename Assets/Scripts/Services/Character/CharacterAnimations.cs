@@ -18,24 +18,18 @@ namespace Rope.Services.Character
         private void OnEnable()
         {
             _death.Death += OnDeath;
-            _movement.Move += OnMove;
             _movement.ReachDestination += OnReachDestination;
         }
 
         private void OnDisable()
         {
             _death.Death -= OnDeath;
-            _movement.Move -= OnMove;
             _movement.ReachDestination -= OnReachDestination;
         }
 
         private void Start()
         {
             _endPoint = AllServices.Container.Single<EndPointService>();
-        }
-
-        private void OnMove()
-        {
         }
 
         private void OnDeath()

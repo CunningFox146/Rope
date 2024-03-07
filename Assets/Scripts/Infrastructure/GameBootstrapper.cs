@@ -2,6 +2,7 @@
 using Rope.Services;
 using Rope.Services.Inputs;
 using Rope.Services.SceneLoading;
+using Rope.Services.Sound;
 using Rope.Services.States;
 using UnityEngine;
 
@@ -23,6 +24,7 @@ namespace Rope.Infrastructure
         private void RegisterServices(AllServices container)
         {
             container.RegisterSingle<ICoroutineRunner>(this);
+            container.RegisterSingle<ISoundPlayer>(new SoundPlayer(this));
             container.RegisterSingle<ISceneLoader>(new SceneLoader(this));
             container.RegisterSingle<IInputService>(new InputService(new MasterInput()));
             

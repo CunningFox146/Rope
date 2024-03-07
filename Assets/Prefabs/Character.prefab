@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 3166141804162781559}
   - component: {fileID: 1229916105258074833}
   - component: {fileID: 2967228488078182827}
+  - component: {fileID: 6965214067670321422}
   m_Layer: 7
   m_Name: Character
   m_TagString: Untagged
@@ -110,6 +111,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb5da1e45a7b4ee18248e31d65a916fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &6965214067670321422
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2625826912748954540}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9a474cc398ef4471b03b0dbf81f58843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _deathSound: {fileID: 11400000, guid: 80ec430176882d24eb802d841f8ac7d1, type: 2}
+  _winSound: {fileID: 11400000, guid: 7d8c825a848195748ba1553caef8e917, type: 2}
+  _death: {fileID: 4134340229586706627}
+  _movement: {fileID: 8237839939218719009}
 --- !u!1 &2747089830584446978
 GameObject:
   m_ObjectHideFlags: 0

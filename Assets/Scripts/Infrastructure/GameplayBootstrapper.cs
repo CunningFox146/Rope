@@ -4,6 +4,7 @@ using Rope.Services.EndPoint;
 using Rope.Services.Inputs;
 using Rope.Services.Interactions;
 using Rope.Services.Rope;
+using Rope.Services.Sound;
 using Rope.Services.Spawner;
 using Rope.Services.States;
 using Rope.UI;
@@ -13,13 +14,16 @@ namespace Rope.Infrastructure
 {
     public class GameplayBootstrapper : MonoBehaviour
     {
+        [SerializeField] private SoundData _mainMusic;
         [SerializeField] private GameObject _characterSpawnerPrefab;
         [SerializeField] private GameObject _uiPrefab;
         private GameStateMachine _stateMachine;
+        private ISoundPlayer _soundPlayer;
 
         private void Awake()
         {
             _stateMachine = AllServices.Container.Single<GameStateMachine>();
+            _soundPlayer = AllServices.Container.Single<ISoundPlayer>();
         }
 
         private void Start()
@@ -27,6 +31,8 @@ namespace Rope.Infrastructure
             RegisterSceneServices(AllServices.Container);
             RegisterSceneStates(AllServices.Container);
 
+            _soundPlayer.Play(_mainMusic);
+            
             _stateMachine.Enter<GameplayLoopState>();
         }
 
