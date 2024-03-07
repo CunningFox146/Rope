@@ -1,10 +1,10 @@
 fileFormatVersion: 2
-guid: 3eebd5242b95fe34787b751e4e8ad1d2
+guid: bde34a65fa253854f932ae54cfe9028d
 TextureImporter:
   internalIDToNameTable:
   - first:
-      213: -1353113472861605954
-    second: bannerScroll_0
+      213: 7119190691173487638
+    second: starDiamond_0
   externalObjects: {}
   serializedVersion: 13
   mipmaps:
@@ -139,13 +139,13 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: bannerScroll_0
+      name: starDiamond_0
       rect:
         serializedVersion: 2
-        x: 0
-        y: 0
-        width: 521
-        height: 126
+        x: 15
+        y: 13
+        width: 40
+        height: 39
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -153,8 +153,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: -1
       bones: []
-      spriteID: ebfe94d2776c83de0800000000000000
-      internalID: -1353113472861605954
+      spriteID: 614d9abe6327cc260800000000000000
+      internalID: 7119190691173487638
       vertices: []
       indices: 
       edges: []
@@ -169,7 +169,8 @@ TextureImporter:
     edges: []
     weights: []
     secondaryTextures: []
-    nameFileIdTable: {}
+    nameFileIdTable:
+      starDiamond_0: 7119190691173487638
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

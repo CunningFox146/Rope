@@ -17,8 +17,8 @@ namespace Rope.UI
 
             gameObject.SetActive(true);
             DOTween.Sequence()
-                .Join(Transform.DOAnchorPos(startPos, 1.5f).SetEase(Ease.OutSine))
-                .Join(_canvasGroup.DOFade(1f, 1.5f).SetEase(Ease.OutSine));
+                .Join(Transform.DOAnchorPos(startPos, 1f).SetEase(Ease.OutSine))
+                .Join(_canvasGroup.DOFade(1f, 1f).SetEase(Ease.OutSine));
         }
 
         public virtual void Hide()
