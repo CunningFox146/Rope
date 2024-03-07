@@ -16,6 +16,7 @@ namespace Rope.Services.Interactions
 
         private Coroutine _draggableCoroutine;
         public bool IsInteracting => _currentDraggable is not null;
+        public bool Enabled { get; set; } = true;
 
         public InteractionService(ICoroutineRunner coroutineRunner, IInputService inputService, Camera camera)
         {
@@ -44,7 +45,7 @@ namespace Rope.Services.Interactions
 
         private IEnumerator DraggableCoroutine()
         {
-            while (_currentDraggable is not null)
+            while (Enabled && _currentDraggable is not null)
             {
                 var pos = _camera.ScreenToWorldPoint(_inputService.PointerPosition);
                 _currentDraggable.Drag(pos);

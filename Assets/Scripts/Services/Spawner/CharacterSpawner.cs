@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using Rope.Infrastructure;
 using Rope.Services.Character;
+using Rope.Services.Interactions;
 using Rope.Services.Movement;
 using Rope.Services.Rope;
 using UnityEngine;
@@ -11,21 +12,21 @@ namespace Rope.Services.Spawner
 {
     public class CharacterSpawner : MonoBehaviour, IService
     {
+        public event Action NoCharacters;
         [SerializeField] private RopeMovement _characterPrefab;
         [SerializeField] private RopeRenderer _ropeRenderer;
         [SerializeField] private int _characterCount;
         [SerializeField] private float _size;
+        
         private readonly List<RopeMovement> _activeCharacters = new();
-
         private readonly Stack<RopeMovement> _spawnedCharacters = new();
+        private InteractionService InteractionService => AllServices.Container.Single<InteractionService>();
 
         private void Start()
         {
             SpawnCharacters(_characterCount);
         }
-
-        public event Action NoCharacters;
-
+        
         private void SpawnCharacters(int characterCount)
         {
             var startOffset = Vector3.left * _size * 0.5f;
@@ -49,6 +50,8 @@ namespace Rope.Services.Spawner
 
             character.ReachDestination += OnReachDestination;
             characterDeath.Death += OnDeath;
+            
+            UpdateActiveCharacters();
 
             void OnReachDestination()
             {
@@ -67,7 +70,9 @@ namespace Rope.Services.Spawner
 
         private void UpdateActiveCharacters()
         {
-            if (!_spawnedCharacters.Any() && !_activeCharacters.Any())
+            var hasAnyActiveCharacters = _activeCharacters.Any();
+            InteractionService.Enabled = !hasAnyActiveCharacters;
+            if (!_spawnedCharacters.Any() && !hasAnyActiveCharacters)
                 NoCharacters?.Invoke();
         }
     }
