@@ -1,4 +1,5 @@
 ﻿using System;
+using DG.Tweening;
 using Rope.Services.Movement;
 using UnityEngine;
 
@@ -6,7 +7,9 @@ namespace Rope.Services.Character
 {
     public class CharacterAnimations : MonoBehaviour
     {
+        private static readonly int Fade = Shader.PropertyToID("_Fade");
         [SerializeField] private SpriteRenderer _renderer;
+        [SerializeField] private ParticleSystem _particles;
         [SerializeField] private CharacterDeath _death;
         [SerializeField] private RopeMovement _movement;
 
@@ -24,12 +27,16 @@ namespace Rope.Services.Character
 
         private void OnMove()
         {
-            throw new NotImplementedException();
+            
         }
 
         private void OnDeath()
         {
-            Destroy(gameObject);
+            _particles.Play();
+            DOTween.Sequence()
+                .Append(transform.DOMoveY(0.25f, 0.5f).SetRelative(true))
+                .Append(_renderer.material.DOFloat(0f, Fade, 1f))
+                .OnComplete(() => Destroy(gameObject));
         }
     }
 }
