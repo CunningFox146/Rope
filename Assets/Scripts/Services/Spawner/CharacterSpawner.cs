@@ -14,16 +14,18 @@ namespace Rope.Services.Spawner
     {
         public event Action NoCharacters;
         [SerializeField] private RopeMovement _characterPrefab;
-        [SerializeField] private RopeRenderer _ropeRenderer;
         [SerializeField] private int _characterCount;
         [SerializeField] private float _size;
         
         private readonly List<RopeMovement> _activeCharacters = new();
         private readonly Stack<RopeMovement> _spawnedCharacters = new();
-        private InteractionService InteractionService => AllServices.Container.Single<InteractionService>();
+        private InteractionService _interactionService;
+        private RopeRenderer _ropeRenderer;
 
         private void Start()
         {
+            _interactionService = AllServices.Container.Single<InteractionService>();
+            _ropeRenderer = AllServices.Container.Single<RopeRenderer>();
             SpawnCharacters(_characterCount);
         }
         
@@ -71,7 +73,7 @@ namespace Rope.Services.Spawner
         private void UpdateActiveCharacters()
         {
             var hasAnyActiveCharacters = _activeCharacters.Any();
-            InteractionService.Enabled = !hasAnyActiveCharacters;
+            _interactionService.Enabled = !hasAnyActiveCharacters;
             if (!_spawnedCharacters.Any() && !hasAnyActiveCharacters)
                 NoCharacters?.Invoke();
         }

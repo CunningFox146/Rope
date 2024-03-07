@@ -12,6 +12,7 @@ namespace Rope.Infrastructure
 {
     public class GameplayBootstrapper : MonoBehaviour
     {
+        [SerializeField] private GameObject _characterSpawnerPrefab;
         private GameStateMachine _stateMachine;
 
         private void Awake()
@@ -31,9 +32,9 @@ namespace Rope.Infrastructure
         {
             container.RegisterSingleFromHierarchy<RopeRenderer>();
             container.RegisterSingleFromHierarchy<EndPointService>();
-            container.RegisterSingleFromHierarchy<CharacterSpawner>();
             container.RegisterSingle(new InteractionService(container.Single<ICoroutineRunner>(),
                 container.Single<IInputService>(), Camera.main));
+            container.RegisterSingleFromNewPrefab<CharacterSpawner>(_characterSpawnerPrefab);
         }
 
         private void RegisterSceneStates(AllServices container)

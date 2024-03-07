@@ -1,5 +1,6 @@
 using System;
 using Rope.Infrastructure;
+using UnityEngine;
 using Object = UnityEngine.Object;
 
 namespace Rope.Services
@@ -25,6 +26,12 @@ namespace Rope.Services
             if (implementation is null)
                 throw new Exception($"Failed to find {typeof(TService).Name} in scene hierarchy");
             Implementation<TService>.ServiceInstance = implementation;
+        }
+        
+        public void RegisterSingleFromNewPrefab<TService>(GameObject prefab) where TService : Object, IService
+        {
+            var obj = Object.Instantiate(prefab);
+            Implementation<TService>.ServiceInstance = obj.GetComponent<TService>();
         }
 
         private class Implementation<TService> where TService : IService
